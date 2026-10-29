@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="theme-color" content="#F2F1F6">
+<title>Home Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div id="stage">
+
+  <button id="gn" class="pill" type="button" aria-label="Start bedtime: turn off all lights and dim the screen"><span data-i="moon" data-s="22"></span>Start bedtime</button>
+
+  <!-- HOME -->
+  <section class="screen on" id="home" aria-label="Home">
+    <div class="hgrid">
+      <div class="clockArea">
+        <div class="date" id="hDate"></div>
+        <div class="time"><span class="hm" id="hTime"></span><span class="ap" id="hAp"></span></div>
+        <div class="greet" id="hGreet"></div>
+      </div>
+      <div class="card wx" id="wx" aria-live="polite"></div>
+      <div class="card upnext">
+        <div class="lbl" id="unK">Up next</div>
+        <div class="r">
+          <div class="evicon"><span data-i="cal" data-s="24"></span></div>
+          <div style="min-width:0">
+            <div class="ttl" id="unT"></div>
+            <div class="sub" id="unS"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card climate">
+        <div class="cl-room">
+          <div class="lbl">Room temperature</div>
+          <div class="roomv" id="inT">72°</div>
+          <div class="cl-status" id="clStat"></div>
+          <div class="cl-note">Preview · AC not linked</div>
+        </div>
+        <div class="setctl" role="group" aria-label="Set temperature">
+          <button type="button" class="stepb" data-sp="-1" aria-label="Lower set temperature"><span data-i="minus" data-s="22"></span></button>
+          <div class="setv"><span class="lbl">Set to</span><b id="spV">70°</b></div>
+          <button type="button" class="stepb" data-sp="1" aria-label="Raise set temperature"><span data-i="plus" data-s="22"></span></button>
+        </div>
+      </div>
+    </div>
+    <div class="scenes" data-scenes></div>
+  </section>
+
+  <!-- LIGHTS -->
+  <section class="screen" id="lights" aria-label="Lights">
+    <div class="head"><h1 class="h1">Lights</h1><div class="h1sub" id="lSub">Bedroom</div></div>
+    <div class="scenes" data-scenes></div>
+    <div id="lgrid"></div>
+  </section>
+
+  <!-- DAY -->
+  <section class="screen" id="day" aria-label="Your day">
+    <div class="head" style="left:88px;top:58px"><h1 class="h1">Your day</h1><div class="h1sub" id="dDate"></div></div>
+    <div class="cols">
+      <div class="card dcard" id="calCard">
+        <div class="dhead"><div class="tile"><span data-i="cal" data-s="34"></span></div>
+          <div class="grow"><b id="calTitle">Calendar</b><span id="calSub">Sample events</span></div>
+          <div class="calnav" id="calNav"></div>
+        </div>
+        <div class="minis" id="calMinis" role="tablist"><button type="button" data-cv="schedule" class="on">Schedule</button><button type="button" data-cv="due">Due</button></div>
+        <div class="calscroll" id="calBody"></div>
+      </div>
+      <div class="card dcard side">
+        <div class="dhead"><div class="tile"><span data-i="checkbox" data-s="34"></span></div><div class="grow"><b>Tasks</b><span id="tLeft"></span></div></div>
+        <div class="list" id="tList"></div>
+        <form class="addf" id="addTask" autocomplete="off"><input id="tIn" type="text" placeholder="+  Add a task" aria-label="Add a task" maxlength="120"></form>
+      </div>
+      <div class="card dcard side">
+        <div class="dhead"><div class="tile"><span data-i="leaf" data-s="34"></span></div><div class="grow"><b>Habits</b><span id="hReset">Resets at 5 AM</span></div></div>
+        <div class="list" id="hList"></div>
+        <div class="foot" id="hFoot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MUSIC -->
+  <section class="screen" id="music" aria-label="Music">
+    <div class="head"><h1 class="h1">Music</h1><div class="h1sub" id="mSub">Spotify</div></div>
+    <div class="body">
+      <div class="card player" id="player"></div>
+      <div class="card side" id="mside"></div>
+    </div>
+  </section>
+
+  <!-- CLOCK -->
+  <section class="screen" id="clock" aria-label="Timers and alarms">
+    <div class="head"><h1 class="h1">Clock</h1><div class="h1sub">Timer, alarm and light schedules</div></div>
+    <div class="body">
+      <div class="card ccard" id="timerCard"></div>
+      <div class="card ccard" id="alarmCard"></div>
+      <div class="card ccard" id="schedCard"></div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section class="screen" id="notes" aria-label="Notes">
+    <div class="head"><h1 class="h1">Notes</h1><div class="h1sub">Whiteboard and quick notes</div></div>
+    <div class="body">
+      <div class="card board">
+        <div class="tools" id="tools"></div>
+        <div class="canvasbox" id="cbox"><canvas id="wb"></canvas></div>
+      </div>
+      <div class="card sticky">
+        <div class="dhead" style="margin-bottom:12px"><div class="grow"><b style="font-size:28px">Quick notes</b></div></div>
+        <div class="list" id="nList"></div>
+        <form class="addf" id="addNote" autocomplete="off"><input id="nIn" type="text" placeholder="+  Jot something down" aria-label="Add a note" maxlength="200"></form>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="screen" id="settings" aria-label="Settings">
+    <div class="head"><h1 class="h1">Settings</h1><div class="h1sub">Connections, lights and display</div></div>
+    <div class="body" id="setBody"></div>
+  </section>
+
+  <nav id="nav" class="card" aria-label="Screens">
+    <span id="navInd" aria-hidden="true"></span>
+    <button class="navb on" type="button" data-go="home"><span data-i="home" data-s="24"></span>Home</button>
+    <button class="navb" type="button" data-go="lights"><span data-i="bulb" data-s="24"></span>Lights</button>
+    <button class="navb" type="button" data-go="day"><span data-i="cal" data-s="24"></span>Day</button>
+    <button class="navb" type="button" data-go="music"><span data-i="music" data-s="24"></span>Music</button>
+    <button class="navb" type="button" data-go="clock"><span data-i="clock" data-s="24"></span>Clock</button>
+    <button class="navb" type="button" data-go="notes"><span data-i="pen" data-s="24"></span>Notes</button>
+    <button class="navb" type="button" data-go="settings"><span data-i="gear" data-s="24"></span>Settings</button>
+  </nav>
+
+  <!-- light detail sheet -->
+  <div class="sheet" id="ld" role="dialog" aria-modal="true" aria-labelledby="ldName">
+    <div class="card panel">
+      <div class="shead">
+        <div style="color:#1E1D28" id="ldIco"></div>
+        <h2 id="ldName">Light</h2>
+        <div class="seg" id="ldTabs"></div>
+        <button type="button" class="tog" id="ldTog" aria-label="Power"><i></i></button>
+        <button type="button" class="pill ibtn" data-close aria-label="Close"><span data-i="x" data-s="26" data-w="2"></span></button>
+      </div>
+      <div id="ldBody"></div>
+      <div class="ldfoot"><span data-i="sun" data-s="32" data-w="1.6"></span>
+        <input type="range" id="ldBri" min="1" max="100" aria-label="Brightness"><span class="pct" id="ldPct"></span></div>
+    </div>
+  </div>
+
+  <!-- schedule editor sheet -->
+  <div class="sheet" id="sched" role="dialog" aria-modal="true" aria-labelledby="schT">
+    <div class="card panel">
+      <div class="shead"><h2 id="schT">New schedule</h2><button type="button" class="pill ibtn" data-close aria-label="Close"><span data-i="x" data-s="26" data-w="2"></span></button></div>
+      <div id="schBody"></div>
+    </div>
+  </div>
+
+  <div id="ring" role="alertdialog" aria-labelledby="ringK">
+    <div class="rk" id="ringK">Alarm</div>
+    <div class="rtm" id="ringT">7:00</div>
+    <div class="rb" id="ringB"></div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<div id="night" aria-hidden="true">
+  <div class="nt2" id="nT"></div>
+  <div class="nd" id="nD"></div>
+  <div class="nn" id="nN"></div>
+  <div class="wake">TAP ANYWHERE TO WAKE</div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
